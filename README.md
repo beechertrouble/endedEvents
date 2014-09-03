@@ -1,6 +1,6 @@
 endedEvents
 ===========
-adds events for when expensive evnts (like scroll and resize) have ended
+adds events for when expensive evnts (like scroll and resize) have ended. Demo @ [http://beechbot.com/demos/endedEvents/](http://beechbot.com/demos/endedEvents/)
 
 
 Requirements
