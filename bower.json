@@ -1,0 +1,17 @@
+{
+	"name": "endedEvents",
+	"version": "1.0.0",
+	"homepage": "https://github.com/beechertrouble/endedEvents",
+	"authors": [
+		"Beecher <beechbot@gmail.com>"
+	],
+	"ignore": [
+		"node_modules",
+		"Gruntfile.js",
+		"package.json",
+		".project"
+	],
+	"main": "endedEvents.min.js",
+	"license": "MIT",
+	"private": false
+}
