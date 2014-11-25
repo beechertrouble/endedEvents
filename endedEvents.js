@@ -28,6 +28,13 @@
 				$(W).trigger('scrollStopped');
 							
 		},
+		eventHandler = function(event, timer, callback) {
+			
+			W.endedEvents[event] = false;
+			clearTimeout(W.endedEvents[timer]);
+			W.endedEvents[timer] = setTimeout( callback , endedEvents.throttle );
+			
+		},
 		resizeStopped =  function() {
 			
 			W.endedEvents.isResizedStopped = true;
@@ -48,21 +55,12 @@
 			// how often should we chck to see if the event has stopped ? ...
 			endedEvents.throttle = throttle === undefined ? 150 : throttle;
 			
-			W.addEventListener("scroll", function() {
-				
-				W.endedEvents.isScrollStopped = false;
-				clearTimeout(W.endedEvents.scrollTimer);
-				W.endedEvents.scrollTimer = setTimeout( scrollStopped , endedEvents.throttle );
-					
-			});
+			W.addEventListener("scroll", function() { eventHandler('isScrollStopped', 'scrollTimer', scrollStopped); });
 			
-			W.addEventListener("resize", function() {
-				
-				W.endedEvents.isResizedStopped = false;
-				clearTimeout(W.endedEvents.resizeTimer);
-				W.endedEvents.resizeTimer = setTimeout( resizeStopped , endedEvents.throttle );
-					
-			});
+			// depending on css, body may be scrolling instead of window ...
+			D.body.addEventListener("scroll", function() { eventHandler('isScrollStopped', 'scrollTimer', scrollStopped); }); 			
+			
+			W.addEventListener("resize", function() { eventHandler('isResizedStopped', 'resizeTimer', resizeStopped); });
 			
 			if($ !== undefined)
 				$.event.props.push(['scrollStopped', 'resizeStopped']);
